@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.mapper.UserMapper">
+
+
+    <resultMap id="userMap" type="com.mybatis.po.User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="sex" property="sex"/>
+        <result column="age" property="age"/>
+        <association column="card_id" property="card"
+                     select="com.mybatis.mapper.CardMapper.getCard"
+                     javaType="com.mybatis.po.Card"/>
+    </resultMap>
+
+    <select id="getUser" parameterType="int" resultMap="userMap">
+        select id,name,sex,age,card_id FROM t_users WHERE id=#{id};
+    </select>
+
+    <insert id="insertUser" parameterType="user" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_users(name,sex,age,card_id)
+        VALUES (#{name},#{sex},#{age},#{card.id})
+    </insert>
+
+
+</mapper>
