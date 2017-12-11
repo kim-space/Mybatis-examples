@@ -1,9 +1,13 @@
 package com.mybatis.po;
 
 import com.mybatis.enums.Sex;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
@@ -11,7 +15,7 @@ import java.util.Date;
 @Alias("user")
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements Serializable{
     private Long id;
     private String userName;
     private String cnname;
@@ -20,5 +24,6 @@ public class User {
     private Sex sex;
     private String email;
     private String note;
+
 
 }

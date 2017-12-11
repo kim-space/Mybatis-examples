@@ -31,7 +31,7 @@ public class UserMapperTest {
 
     @Test
     public void getUser() throws Exception {
-        User user = userMapper.getUser(1L);
+        User user = userMapper.getUser(2L);
         System.out.println(user);
     }
 
