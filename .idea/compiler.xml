@@ -13,9 +13,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="1.8">
-      <module name="hello-sample" target="1.5" />
-      <module name="mybatis-cache" target="1.5" />
-      <module name="mybatis-mappring" target="1.5" />
+      <module name="hello-sample" target="1.8" />
+      <module name="mybatis-cache" target="1.8" />
+      <module name="mybatis-mappring" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

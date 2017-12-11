@@ -13,6 +13,8 @@ public interface RoleMapper {
 
     int insertRole(Role role);
 
+    int insertRoles(List<Role> roles);
+
     int deleteRole(Long id);
 
     List<Role> getRoleByMap(Map<String,String> params);
@@ -20,6 +22,10 @@ public interface RoleMapper {
     List<Role> getRoleByMapAnnotation(@Param("roleName")String roleName, @Param("note")String noe);
 
     List<Role> getRoleByParams(RoleParam param);
+
+    List<Role> findRole(RoleParam param);
+
+    List<Role> findRoles(List<String> names);
 
 }
 

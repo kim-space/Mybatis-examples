@@ -42,7 +42,7 @@ public class UserMapperTest {
                 .cnname("cn")
                 .birthday(new Date())
                 .email("bchsdbibcdsjb@dd.com")
-                .mibile("132145326")
+                .mobile("132145326")
                 .sex(Sex.MALE)
                 .note("hello").build();
         int i = userMapper.insertUser(build);

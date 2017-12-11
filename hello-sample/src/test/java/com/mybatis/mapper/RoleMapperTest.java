@@ -1,5 +1,6 @@
 package com.mybatis.mapper;
 
+import com.mybatis.params.RoleParam;
 import com.mybatis.po.Role;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -10,6 +11,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -58,10 +60,52 @@ public class RoleMapperTest {
     public void getRoleByMap(){
         RoleMapper mapper = session.getMapper(RoleMapper.class);
         HashMap<String, String> paramMap = new HashMap<String, String>();
-        paramMap.put("roleName","admin");
+        paramMap.put("roleName","superAdmin");
         paramMap.put("note","管理员");
         List<Role> roleByMap = mapper.getRoleByMap(paramMap);
         roleByMap.forEach(System.out::println);
     }
 
+
+    @Test
+    public void findRole(){
+        RoleMapper mapper = session.getMapper(RoleMapper.class);
+        RoleParam param = new RoleParam();
+        param.setRoleName("admin");
+        param.setNote("管理员");
+        List<Role> roles = mapper.findRole(param);
+        roles.forEach(System.out::println);
+    }
+
+    @Test
+    public void findRoles(){
+        RoleMapper mapper = session.getMapper(RoleMapper.class);
+        List<String> names = new ArrayList<>();
+        names.add("admin");
+        names.add("superAdmin");
+        List<Role> roles = mapper.findRoles(names);
+        roles.forEach(System.out::println);
+    }
+
+
+    @Test
+    public void batchInsert(){
+        RoleMapper mapper = session.getMapper(RoleMapper.class);
+        Role role = new Role();
+        role.setRoleName("vip");
+        role.setNote("会员");
+        Role role2 = new Role();
+        role2.setRoleName("vip2");
+        role2.setNote("会员");
+        Role role3 = new Role();
+        role3.setRoleName("vip3");
+        role3.setNote("会员");
+        List roles = new ArrayList();
+        roles.add(role);
+        roles.add(role2);
+        roles.add(role3);
+        int i = mapper.insertRoles(roles);
+        session.commit();
+        System.out.println(i);
+    }
 }

@@ -10,6 +10,13 @@
         INSERT INTO t_role(roleName,note) VALUES (#{roleName},#{note})
     </insert>
 
+    <insert id="insertRoles" parameterType="list" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_role(roleName,note) VALUES
+        <foreach collection="list" item="role" index="index" separator=",">
+            (#{role.roleName},#{role.note})
+        </foreach>
+    </insert>
+
     <delete id="deleteRole" parameterType="long">
         DELETE FROM t_role WHERE id=#{id}
     </delete>
@@ -30,6 +37,31 @@
         select id,roleName,note FROM t_role
         where roleName like concat('%',#{roleName},'%')
               and note like concat('%',#{note},'%')
+    </select>
+    
+    <select id="findRole" resultType="role">
+        select id,roleName,note FROM t_role
+        <where>
+            <choose>
+                <when test="roleName != null and roleName != ''">
+                    and roleName = #{roleName}
+                </when>
+                <when test="note != null and note != ''">
+                    and note = #{note}
+                </when>
+                <otherwise>
+                    and note is not null
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+
+    <select id="findRoles" resultType="role">
+        select id,roleName,note from t_role where roleName in
+        <foreach collection="list" item="name" open="(" close=")" separator="," index="idx">
+            #{name}
+        </foreach>
     </select>
 
 </mapper>
